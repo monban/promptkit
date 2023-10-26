@@ -274,3 +274,16 @@ func assertNoError(tb testing.TB, m *textinput.Model) {
 		tb.Fatalf("model contains error: %v", m.Err)
 	}
 }
+
+func TestBlur(t *testing.T) {
+	m := textinput.NewModel(textinput.New("foo:"))
+	test.Run(t, m)
+	m.Blur()
+	if m.Focused() == true {
+		t.Fatal("failed to blur")
+	}
+	m.Focus()
+	if m.Focused() == false {
+		t.Fatalf("failed to focus")
+	}
+}

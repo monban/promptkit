@@ -305,6 +305,23 @@ func (m *Model) autoCompleteResult(input string) string {
 	}
 }
 
+// Focused returns the focus state on the model.
+func (m Model) Focused() bool {
+	return m.input.Focused()
+}
+
+// Focus sets the focus state on the model. When the model is in focus it can
+// receive keyboard input and the cursor will be shown.
+func (m *Model) Focus() tea.Cmd {
+	return m.input.Focus()
+}
+
+// Blur removes the focus state on the model.  When the model is blurred it can
+// not receive keyboard input and the cursor will be hidden.
+func (m *Model) Blur() {
+	m.input.Blur()
+}
+
 func zeroAwareMin(a int, b int) int {
 	switch {
 	case a == 0:
